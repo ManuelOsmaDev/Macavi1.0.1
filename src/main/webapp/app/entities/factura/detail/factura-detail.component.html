@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="factura">
+      <h2 data-cy="facturaDetailsHeading"><span macaviTranslate="macaviApp.factura.detail.title">Factura</span></h2>
+
+      <hr />
+
+      <macavi-alert-error></macavi-alert-error>
+
+      <macavi-alert></macavi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span macaviTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ factura.id }}</span>
+        </dd>
+        <dt><span macaviTranslate="macaviApp.factura.descripcion">Descripcion</span></dt>
+        <dd>
+          <span>{{ factura.descripcion }}</span>
+        </dd>
+        <dt><span macaviTranslate="macaviApp.factura.fechaFact">Fecha Fact</span></dt>
+        <dd>
+          <span>{{ factura.fechaFact | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span macaviTranslate="macaviApp.factura.fechaVenc">Fecha Venc</span></dt>
+        <dd>
+          <span>{{ factura.fechaVenc | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span macaviTranslate="macaviApp.factura.tipoPago">Tipo Pago</span></dt>
+        <dd>
+          <span>{{ factura.tipoPago }}</span>
+        </dd>
+        <dt><span macaviTranslate="macaviApp.factura.totalFactura">Total Factura</span></dt>
+        <dd>
+          <span>{{ factura.totalFactura }}</span>
+        </dd>
+        <dt><span macaviTranslate="macaviApp.factura.cliente">Cliente</span></dt>
+        <dd>
+          <div *ngIf="factura.cliente">
+            <a [routerLink]="['/cliente', factura.cliente?.id, 'view']">{{ factura.cliente?.id }}</a>
+          </div>
+        </dd>
+        <dt><span macaviTranslate="macaviApp.factura.usuario">Usuario</span></dt>
+        <dd>
+          <div *ngIf="factura.usuario">
+            <a [routerLink]="['/usuario', factura.usuario?.id, 'view']">{{ factura.usuario?.id }}</a>
+          </div>
+        </dd>
+        <dt><span macaviTranslate="macaviApp.factura.prodctofactura">Prodctofactura</span></dt>
+        <dd>
+          <div *ngIf="factura.prodctofactura">
+            <a [routerLink]="['/producto-factura', factura.prodctofactura?.id, 'view']">{{ factura.prodctofactura?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span macaviTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/factura', factura.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span macaviTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

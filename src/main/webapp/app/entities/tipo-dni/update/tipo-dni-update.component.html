@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="macavi-tipo-dni-heading" data-cy="TipoDniCreateUpdateHeading" macaviTranslate="macaviApp.tipoDni.home.createOrEditLabel">
+        Create or edit a Tipo Dni
+      </h2>
+
+      <div>
+        <macavi-alert-error></macavi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" macaviTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" macaviTranslate="macaviApp.tipoDni.nombreDni" for="field_nombreDni">Nombre Dni</label>
+          <input type="text" class="form-control" name="nombreDni" id="field_nombreDni" data-cy="nombreDni" formControlName="nombreDni" />
+          <div *ngIf="editForm.get('nombreDni')!.invalid && (editForm.get('nombreDni')!.dirty || editForm.get('nombreDni')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nombreDni')?.errors?.required"
+              macaviTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nombreDni')?.errors?.maxlength"
+              macaviTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 20 }"
+            >
+              This field cannot be longer than 20 characters.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span macaviTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span macaviTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

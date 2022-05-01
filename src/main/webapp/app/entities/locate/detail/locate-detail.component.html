@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="locate">
+      <h2 data-cy="locateDetailsHeading"><span macaviTranslate="macaviApp.locate.detail.title">Locate</span></h2>
+
+      <hr />
+
+      <macavi-alert-error></macavi-alert-error>
+
+      <macavi-alert></macavi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span macaviTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ locate.id }}</span>
+        </dd>
+        <dt><span macaviTranslate="macaviApp.locate.ciudad">Ciudad</span></dt>
+        <dd>
+          <span>{{ locate.ciudad }}</span>
+        </dd>
+        <dt><span macaviTranslate="macaviApp.locate.departamento">Departamento</span></dt>
+        <dd>
+          <span>{{ locate.departamento }}</span>
+        </dd>
+        <dt><span macaviTranslate="macaviApp.locate.pais">Pais</span></dt>
+        <dd>
+          <span>{{ locate.pais }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span macaviTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/locate', locate.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span macaviTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

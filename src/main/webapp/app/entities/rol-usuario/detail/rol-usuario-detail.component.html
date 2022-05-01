@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="rolUsuario">
+      <h2 data-cy="rolUsuarioDetailsHeading"><span macaviTranslate="macaviApp.rolUsuario.detail.title">Rol Usuario</span></h2>
+
+      <hr />
+
+      <macavi-alert-error></macavi-alert-error>
+
+      <macavi-alert></macavi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span macaviTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ rolUsuario.id }}</span>
+        </dd>
+        <dt><span macaviTranslate="macaviApp.rolUsuario.rol">Rol</span></dt>
+        <dd>
+          <div *ngIf="rolUsuario.rol">
+            <a [routerLink]="['/rol', rolUsuario.rol?.id, 'view']">{{ rolUsuario.rol?.id }}</a>
+          </div>
+        </dd>
+        <dt><span macaviTranslate="macaviApp.rolUsuario.usuarioRol">Usuario Rol</span></dt>
+        <dd>
+          <div *ngIf="rolUsuario.usuarioRol">
+            <a [routerLink]="['/usuario', rolUsuario.usuarioRol?.id, 'view']">{{ rolUsuario.usuarioRol?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span macaviTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/rol-usuario', rolUsuario.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span macaviTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

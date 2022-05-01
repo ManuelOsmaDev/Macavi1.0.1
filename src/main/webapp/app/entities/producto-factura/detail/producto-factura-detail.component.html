@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="productoFactura">
+      <h2 data-cy="productoFacturaDetailsHeading">
+        <span macaviTranslate="macaviApp.productoFactura.detail.title">Producto Factura</span>
+      </h2>
+
+      <hr />
+
+      <macavi-alert-error></macavi-alert-error>
+
+      <macavi-alert></macavi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span macaviTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ productoFactura.id }}</span>
+        </dd>
+        <dt><span macaviTranslate="macaviApp.productoFactura.producto">Producto</span></dt>
+        <dd>
+          <div *ngIf="productoFactura.producto">
+            <a [routerLink]="['/producto', productoFactura.producto?.id, 'view']">{{ productoFactura.producto?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span macaviTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/producto-factura', productoFactura.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span macaviTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

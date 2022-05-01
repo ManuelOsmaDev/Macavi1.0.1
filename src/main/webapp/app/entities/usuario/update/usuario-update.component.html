@@ -1,0 +1,166 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="macavi-usuario-heading" data-cy="UsuarioCreateUpdateHeading" macaviTranslate="macaviApp.usuario.home.createOrEditLabel">
+        Create or edit a Usuario
+      </h2>
+
+      <div>
+        <macavi-alert-error></macavi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" macaviTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" macaviTranslate="macaviApp.usuario.email" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('email')?.errors?.required"
+              macaviTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('email')?.errors?.maxlength"
+              macaviTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 100 }"
+            >
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" macaviTranslate="macaviApp.usuario.loginUsuario" for="field_loginUsuario">Login Usuario</label>
+          <input
+            type="text"
+            class="form-control"
+            name="loginUsuario"
+            id="field_loginUsuario"
+            data-cy="loginUsuario"
+            formControlName="loginUsuario"
+          />
+          <div
+            *ngIf="editForm.get('loginUsuario')!.invalid && (editForm.get('loginUsuario')!.dirty || editForm.get('loginUsuario')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('loginUsuario')?.errors?.required"
+              macaviTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('loginUsuario')?.errors?.maxlength"
+              macaviTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 100 }"
+            >
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" macaviTranslate="macaviApp.usuario.nombre" for="field_nombre">Nombre</label>
+          <input type="text" class="form-control" name="nombre" id="field_nombre" data-cy="nombre" formControlName="nombre" />
+          <div *ngIf="editForm.get('nombre')!.invalid && (editForm.get('nombre')!.dirty || editForm.get('nombre')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nombre')?.errors?.required"
+              macaviTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nombre')?.errors?.maxlength"
+              macaviTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 30 }"
+            >
+              This field cannot be longer than 30 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" macaviTranslate="macaviApp.usuario.tipoDni" for="field_tipoDni">Tipo Dni</label>
+          <input type="text" class="form-control" name="tipoDni" id="field_tipoDni" data-cy="tipoDni" formControlName="tipoDni" />
+          <div *ngIf="editForm.get('tipoDni')!.invalid && (editForm.get('tipoDni')!.dirty || editForm.get('tipoDni')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('tipoDni')?.errors?.required"
+              macaviTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('tipoDni')?.errors?.maxlength"
+              macaviTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 90 }"
+            >
+              This field cannot be longer than 90 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" macaviTranslate="macaviApp.usuario.password" for="field_password">Password</label>
+          <input type="text" class="form-control" name="password" id="field_password" data-cy="password" formControlName="password" />
+          <div *ngIf="editForm.get('password')!.invalid && (editForm.get('password')!.dirty || editForm.get('password')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('password')?.errors?.required"
+              macaviTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('password')?.errors?.maxlength"
+              macaviTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 100 }"
+            >
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" macaviTranslate="macaviApp.usuario.tipodni" for="field_tipodni">Tipodni</label>
+          <select class="form-control" id="field_tipodni" data-cy="tipodni" name="tipodni" formControlName="tipodni">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="tipoDniOption.id === editForm.get('tipodni')!.value?.id ? editForm.get('tipodni')!.value : tipoDniOption"
+              *ngFor="let tipoDniOption of tipoDnisSharedCollection; trackBy: trackTipoDniById"
+            >
+              {{ tipoDniOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span macaviTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span macaviTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

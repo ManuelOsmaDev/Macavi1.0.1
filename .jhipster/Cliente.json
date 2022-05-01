@@ -1,0 +1,46 @@
+{
+  "applications": ["macavi"],
+  "changelogDate": "20220501203539",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "cliente",
+  "fields": [
+    {
+      "fieldName": "direcion",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "60"
+    },
+    {
+      "fieldName": "telefono",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Cliente",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "factura",
+      "otherEntityRelationshipName": "cliente",
+      "relationshipName": "factura",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "locate",
+      "otherEntityRelationshipName": "cliente",
+      "relationshipName": "locate",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "usuario",
+      "otherEntityRelationshipName": "cliente",
+      "relationshipName": "usuario",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

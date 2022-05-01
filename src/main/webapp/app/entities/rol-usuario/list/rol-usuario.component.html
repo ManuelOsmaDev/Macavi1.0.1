@@ -1,0 +1,88 @@
+<div>
+  <h2 id="page-heading" data-cy="RolUsuarioHeading">
+    <span macaviTranslate="macaviApp.rolUsuario.home.title">Rol Usuarios</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span macaviTranslate="macaviApp.rolUsuario.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-rol-usuario"
+        [routerLink]="['/rol-usuario/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span macaviTranslate="macaviApp.rolUsuario.home.createLabel"> Create a new Rol Usuario </span>
+      </button>
+    </div>
+  </h2>
+
+  <macavi-alert-error></macavi-alert-error>
+
+  <macavi-alert></macavi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="rolUsuarios?.length === 0">
+    <span macaviTranslate="macaviApp.rolUsuario.home.notFound">No rolUsuarios found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="rolUsuarios && rolUsuarios.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span macaviTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span macaviTranslate="macaviApp.rolUsuario.rol">Rol</span></th>
+          <th scope="col"><span macaviTranslate="macaviApp.rolUsuario.usuarioRol">Usuario Rol</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rolUsuario of rolUsuarios; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/rol-usuario', rolUsuario.id, 'view']">{{ rolUsuario.id }}</a>
+          </td>
+          <td>
+            <div *ngIf="rolUsuario.rol">
+              <a [routerLink]="['/rol', rolUsuario.rol?.id, 'view']">{{ rolUsuario.rol?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="rolUsuario.usuarioRol">
+              <a [routerLink]="['/usuario', rolUsuario.usuarioRol?.id, 'view']">{{ rolUsuario.usuarioRol?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/rol-usuario', rolUsuario.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" macaviTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/rol-usuario', rolUsuario.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" macaviTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(rolUsuario)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" macaviTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

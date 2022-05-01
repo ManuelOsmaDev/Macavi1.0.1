@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="usuario">
+      <h2 data-cy="usuarioDetailsHeading"><span macaviTranslate="macaviApp.usuario.detail.title">Usuario</span></h2>
+
+      <hr />
+
+      <macavi-alert-error></macavi-alert-error>
+
+      <macavi-alert></macavi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span macaviTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ usuario.id }}</span>
+        </dd>
+        <dt><span macaviTranslate="macaviApp.usuario.email">Email</span></dt>
+        <dd>
+          <span>{{ usuario.email }}</span>
+        </dd>
+        <dt><span macaviTranslate="macaviApp.usuario.loginUsuario">Login Usuario</span></dt>
+        <dd>
+          <span>{{ usuario.loginUsuario }}</span>
+        </dd>
+        <dt><span macaviTranslate="macaviApp.usuario.nombre">Nombre</span></dt>
+        <dd>
+          <span>{{ usuario.nombre }}</span>
+        </dd>
+        <dt><span macaviTranslate="macaviApp.usuario.tipoDni">Tipo Dni</span></dt>
+        <dd>
+          <span>{{ usuario.tipoDni }}</span>
+        </dd>
+        <dt><span macaviTranslate="macaviApp.usuario.password">Password</span></dt>
+        <dd>
+          <span>{{ usuario.password }}</span>
+        </dd>
+        <dt><span macaviTranslate="macaviApp.usuario.tipodni">Tipodni</span></dt>
+        <dd>
+          <div *ngIf="usuario.tipodni">
+            <a [routerLink]="['/tipo-dni', usuario.tipodni?.id, 'view']">{{ usuario.tipodni?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span macaviTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/usuario', usuario.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span macaviTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

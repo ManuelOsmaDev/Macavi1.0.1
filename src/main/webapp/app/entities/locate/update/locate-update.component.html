@@ -1,0 +1,109 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="macavi-locate-heading" data-cy="LocateCreateUpdateHeading" macaviTranslate="macaviApp.locate.home.createOrEditLabel">
+        Create or edit a Locate
+      </h2>
+
+      <div>
+        <macavi-alert-error></macavi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" macaviTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" macaviTranslate="macaviApp.locate.ciudad" for="field_ciudad">Ciudad</label>
+          <input type="text" class="form-control" name="ciudad" id="field_ciudad" data-cy="ciudad" formControlName="ciudad" />
+          <div *ngIf="editForm.get('ciudad')!.invalid && (editForm.get('ciudad')!.dirty || editForm.get('ciudad')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('ciudad')?.errors?.required"
+              macaviTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('ciudad')?.errors?.maxlength"
+              macaviTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" macaviTranslate="macaviApp.locate.departamento" for="field_departamento">Departamento</label>
+          <input
+            type="text"
+            class="form-control"
+            name="departamento"
+            id="field_departamento"
+            data-cy="departamento"
+            formControlName="departamento"
+          />
+          <div
+            *ngIf="editForm.get('departamento')!.invalid && (editForm.get('departamento')!.dirty || editForm.get('departamento')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('departamento')?.errors?.required"
+              macaviTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('departamento')?.errors?.maxlength"
+              macaviTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" macaviTranslate="macaviApp.locate.pais" for="field_pais">Pais</label>
+          <input type="text" class="form-control" name="pais" id="field_pais" data-cy="pais" formControlName="pais" />
+          <div *ngIf="editForm.get('pais')!.invalid && (editForm.get('pais')!.dirty || editForm.get('pais')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('pais')?.errors?.required"
+              macaviTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('pais')?.errors?.maxlength"
+              macaviTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span macaviTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span macaviTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

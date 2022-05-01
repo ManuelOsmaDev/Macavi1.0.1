@@ -1,0 +1,25 @@
+{
+  "macaviApp": {
+    "rolUsuario": {
+      "home": {
+        "title": "Rol Usuarios",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Rol Usuario",
+        "createOrEditLabel": "Create or edit a Rol Usuario",
+        "notFound": "No Rol Usuarios found"
+      },
+      "created": "A new Rol Usuario is created with identifier {{ param }}",
+      "updated": "A Rol Usuario is updated with identifier {{ param }}",
+      "deleted": "A Rol Usuario is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Rol Usuario {{ id }}?"
+      },
+      "detail": {
+        "title": "Rol Usuario"
+      },
+      "id": "ID",
+      "rol": "Rol",
+      "usuarioRol": "Usuario Rol"
+    }
+  }
+}

@@ -1,0 +1,90 @@
+
+application {
+  config {
+    baseName macavi,
+    applicationType monolith,
+    packageName com.macavi,
+    authenticationType jwt,
+    prodDatabaseType postgresql
+    devDatabaseType postgresql
+    clientFramework angularX
+    cacheProvider no
+    buildTool maven
+    enableTranslation true
+    nativeLanguage es
+    languages [en,es]
+    websocket false
+    jhiPrefix macavi
+    reactive false
+    serverPort 8080
+    searchEngine false
+    clientTheme Minty
+    clientThemeVariant PRIMARY
+    
+  }
+  entities *
+}
+entity Locate{
+ ciudad String required maxlength(50) unique
+ departamento String required maxlength(50) unique
+ pais String required maxlength(50) unique
+}
+entity Cliente{
+ direcion String required maxlength(60)
+ telefono Integer required 
+ 
+}
+entity TipoDni{
+	nombreDni String required maxlength(20) unique
+}
+entity Usuario{
+	email String required maxlength(100)
+    loginUsuario String required maxlength(100)
+    nombre String required maxlength(30)
+    tipoDni String required maxlength(90)
+    password String required maxlength(100)
+}
+entity Factura{
+	descripcion String required maxlength(500)
+	fechaFact ZonedDateTime required
+	fechaVenc ZonedDateTime required
+	tipoPago String required maxlength(10)
+	totalFactura Double
+}
+entity Rol{
+nombreRol String required maxlength(20) unique
+}
+entity RolUsuario{
+
+}
+
+entity Producto{
+	cantidadProducto Integer
+	descripcionProdcuto String required maxlength(100)
+	estilo String required maxlength(20) 
+	genero String required maxlength(20) 
+	marca String required maxlength(20) 
+    porcentajeIva Float
+    talla Integer
+}
+
+entity ProductoFactura{
+
+}
+
+relationship OneToMany{
+	Locate to Cliente{locate}
+    Usuario to Cliente{usuario}
+    TipoDni to Usuario{tipodni}
+    Cliente to Factura{cliente}
+    Usuario to Factura{usuario}
+    Rol to RolUsuario{rol}
+    Usuario to RolUsuario{usuarioRol}
+    Producto to ProductoFactura{producto}
+    ProductoFactura to Factura{prodctofactura}
+    
+}
+
+
+
+    

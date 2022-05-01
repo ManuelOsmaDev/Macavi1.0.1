@@ -1,0 +1,71 @@
+{
+  "applications": ["macavi"],
+  "changelogDate": "20220501203739",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "usuario",
+  "fields": [
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "loginUsuario",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "nombre",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "30"
+    },
+    {
+      "fieldName": "tipoDni",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "90"
+    },
+    {
+      "fieldName": "password",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Usuario",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "cliente",
+      "otherEntityRelationshipName": "usuario",
+      "relationshipName": "cliente",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "factura",
+      "otherEntityRelationshipName": "usuario",
+      "relationshipName": "factura",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "rolUsuario",
+      "otherEntityRelationshipName": "usuarioRol",
+      "relationshipName": "rolUsuario",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "tipoDni",
+      "otherEntityRelationshipName": "usuario",
+      "relationshipName": "tipodni",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

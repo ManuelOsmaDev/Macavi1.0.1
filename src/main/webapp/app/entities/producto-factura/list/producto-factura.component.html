@@ -1,0 +1,82 @@
+<div>
+  <h2 id="page-heading" data-cy="ProductoFacturaHeading">
+    <span macaviTranslate="macaviApp.productoFactura.home.title">Producto Facturas</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span macaviTranslate="macaviApp.productoFactura.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-producto-factura"
+        [routerLink]="['/producto-factura/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span macaviTranslate="macaviApp.productoFactura.home.createLabel"> Create a new Producto Factura </span>
+      </button>
+    </div>
+  </h2>
+
+  <macavi-alert-error></macavi-alert-error>
+
+  <macavi-alert></macavi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="productoFacturas?.length === 0">
+    <span macaviTranslate="macaviApp.productoFactura.home.notFound">No productoFacturas found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="productoFacturas && productoFacturas.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span macaviTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span macaviTranslate="macaviApp.productoFactura.producto">Producto</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let productoFactura of productoFacturas; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/producto-factura', productoFactura.id, 'view']">{{ productoFactura.id }}</a>
+          </td>
+          <td>
+            <div *ngIf="productoFactura.producto">
+              <a [routerLink]="['/producto', productoFactura.producto?.id, 'view']">{{ productoFactura.producto?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/producto-factura', productoFactura.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" macaviTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/producto-factura', productoFactura.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" macaviTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(productoFactura)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" macaviTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

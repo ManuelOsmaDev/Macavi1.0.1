@@ -1,0 +1,25 @@
+{
+  "macaviApp": {
+    "productoFactura": {
+      "home": {
+        "title": "Producto Facturas",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Producto Factura",
+        "createOrEditLabel": "Crear o editar Producto Factura",
+        "notFound": "Ningún Producto Facturas encontrado"
+      },
+      "created": "Un nuevo Producto Factura ha sido creado con el identificador {{ param }}",
+      "updated": "Un Producto Factura ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Producto Factura ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Producto Factura {{ id }}?"
+      },
+      "detail": {
+        "title": "Producto Factura"
+      },
+      "id": "ID",
+      "factura": "Factura",
+      "producto": "Producto"
+    }
+  }
+}

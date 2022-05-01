@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="macavi-rol-usuario-heading"
+        data-cy="RolUsuarioCreateUpdateHeading"
+        macaviTranslate="macaviApp.rolUsuario.home.createOrEditLabel"
+      >
+        Create or edit a Rol Usuario
+      </h2>
+
+      <div>
+        <macavi-alert-error></macavi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" macaviTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" macaviTranslate="macaviApp.rolUsuario.rol" for="field_rol">Rol</label>
+          <select class="form-control" id="field_rol" data-cy="rol" name="rol" formControlName="rol">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="rolOption.id === editForm.get('rol')!.value?.id ? editForm.get('rol')!.value : rolOption"
+              *ngFor="let rolOption of rolsSharedCollection; trackBy: trackRolById"
+            >
+              {{ rolOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" macaviTranslate="macaviApp.rolUsuario.usuarioRol" for="field_usuarioRol">Usuario Rol</label>
+          <select class="form-control" id="field_usuarioRol" data-cy="usuarioRol" name="usuarioRol" formControlName="usuarioRol">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="usuarioOption.id === editForm.get('usuarioRol')!.value?.id ? editForm.get('usuarioRol')!.value : usuarioOption"
+              *ngFor="let usuarioOption of usuariosSharedCollection; trackBy: trackUsuarioById"
+            >
+              {{ usuarioOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span macaviTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span macaviTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

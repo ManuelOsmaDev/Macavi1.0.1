@@ -1,0 +1,29 @@
+<form *ngIf="rolUsuario" name="deleteForm" (ngSubmit)="confirmDelete(rolUsuario.id!)">
+  <div class="modal-header">
+    <h4 class="modal-title" data-cy="rolUsuarioDeleteDialogHeading" macaviTranslate="entity.delete.title">Confirm delete operation</h4>
+
+    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <macavi-alert-error></macavi-alert-error>
+
+    <p
+      id="macavi-delete-rolUsuario-heading"
+      macaviTranslate="macaviApp.rolUsuario.delete.question"
+      [translateValues]="{ id: rolUsuario.id }"
+    >
+      Are you sure you want to delete this Rol Usuario?
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span macaviTranslate="entity.action.cancel">Cancel</span>
+    </button>
+
+    <button id="macavi-confirm-delete-rolUsuario" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+      <fa-icon icon="times"></fa-icon>&nbsp;<span macaviTranslate="entity.action.delete">Delete</span>
+    </button>
+  </div>
+</form>

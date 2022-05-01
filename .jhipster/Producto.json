@@ -1,0 +1,59 @@
+{
+  "applications": ["macavi"],
+  "changelogDate": "20220501204139",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "producto",
+  "fields": [
+    {
+      "fieldName": "cantidadProducto",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "descripcionProdcuto",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "estilo",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "20"
+    },
+    {
+      "fieldName": "genero",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "20"
+    },
+    {
+      "fieldName": "marca",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "20"
+    },
+    {
+      "fieldName": "porcentajeIva",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "talla",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Producto",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "productoFactura",
+      "otherEntityRelationshipName": "producto",
+      "relationshipName": "productoFactura",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

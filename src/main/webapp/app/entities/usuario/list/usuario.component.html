@@ -1,0 +1,92 @@
+<div>
+  <h2 id="page-heading" data-cy="UsuarioHeading">
+    <span macaviTranslate="macaviApp.usuario.home.title">Usuarios</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span macaviTranslate="macaviApp.usuario.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-usuario"
+        [routerLink]="['/usuario/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span macaviTranslate="macaviApp.usuario.home.createLabel"> Create a new Usuario </span>
+      </button>
+    </div>
+  </h2>
+
+  <macavi-alert-error></macavi-alert-error>
+
+  <macavi-alert></macavi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="usuarios?.length === 0">
+    <span macaviTranslate="macaviApp.usuario.home.notFound">No usuarios found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="usuarios && usuarios.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span macaviTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span macaviTranslate="macaviApp.usuario.email">Email</span></th>
+          <th scope="col"><span macaviTranslate="macaviApp.usuario.loginUsuario">Login Usuario</span></th>
+          <th scope="col"><span macaviTranslate="macaviApp.usuario.nombre">Nombre</span></th>
+          <th scope="col"><span macaviTranslate="macaviApp.usuario.tipoDni">Tipo Dni</span></th>
+          <th scope="col"><span macaviTranslate="macaviApp.usuario.password">Password</span></th>
+          <th scope="col"><span macaviTranslate="macaviApp.usuario.tipodni">Tipodni</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/usuario', usuario.id, 'view']">{{ usuario.id }}</a>
+          </td>
+          <td>{{ usuario.email }}</td>
+          <td>{{ usuario.loginUsuario }}</td>
+          <td>{{ usuario.nombre }}</td>
+          <td>{{ usuario.tipoDni }}</td>
+          <td>{{ usuario.password }}</td>
+          <td>
+            <div *ngIf="usuario.tipodni">
+              <a [routerLink]="['/tipo-dni', usuario.tipodni?.id, 'view']">{{ usuario.tipodni?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/usuario', usuario.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" macaviTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/usuario', usuario.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" macaviTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(usuario)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" macaviTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

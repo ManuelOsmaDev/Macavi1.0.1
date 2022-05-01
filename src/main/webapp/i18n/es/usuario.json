@@ -1,0 +1,32 @@
+{
+  "macaviApp": {
+    "usuario": {
+      "home": {
+        "title": "Usuarios",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Usuario",
+        "createOrEditLabel": "Crear o editar Usuario",
+        "notFound": "Ningún Usuarios encontrado"
+      },
+      "created": "Un nuevo Usuario ha sido creado con el identificador {{ param }}",
+      "updated": "Un Usuario ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Usuario ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Usuario {{ id }}?"
+      },
+      "detail": {
+        "title": "Usuario"
+      },
+      "id": "ID",
+      "email": "Email",
+      "loginUsuario": "Login Usuario",
+      "nombre": "Nombre",
+      "tipoDni": "Tipo Dni",
+      "password": "Password",
+      "cliente": "Cliente",
+      "factura": "Factura",
+      "rolUsuario": "Rol Usuario",
+      "tipodni": "Tipodni"
+    }
+  }
+}

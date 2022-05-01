@@ -1,0 +1,175 @@
+package com.macavi.web.rest;
+
+import com.macavi.domain.ProductoFactura;
+import com.macavi.repository.ProductoFacturaRepository;
+import com.macavi.web.rest.errors.BadRequestAlertException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+import tech.jhipster.web.util.HeaderUtil;
+import tech.jhipster.web.util.ResponseUtil;
+
+/**
+ * REST controller for managing {@link com.macavi.domain.ProductoFactura}.
+ */
+@RestController
+@RequestMapping("/api")
+@Transactional
+public class ProductoFacturaResource {
+
+    private final Logger log = LoggerFactory.getLogger(ProductoFacturaResource.class);
+
+    private static final String ENTITY_NAME = "productoFactura";
+
+    @Value("${jhipster.clientApp.name}")
+    private String applicationName;
+
+    private final ProductoFacturaRepository productoFacturaRepository;
+
+    public ProductoFacturaResource(ProductoFacturaRepository productoFacturaRepository) {
+        this.productoFacturaRepository = productoFacturaRepository;
+    }
+
+    /**
+     * {@code POST  /producto-facturas} : Create a new productoFactura.
+     *
+     * @param productoFactura the productoFactura to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new productoFactura, or with status {@code 400 (Bad Request)} if the productoFactura has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/producto-facturas")
+    public ResponseEntity<ProductoFactura> createProductoFactura(@RequestBody ProductoFactura productoFactura) throws URISyntaxException {
+        log.debug("REST request to save ProductoFactura : {}", productoFactura);
+        if (productoFactura.getId() != null) {
+            throw new BadRequestAlertException("A new productoFactura cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        ProductoFactura result = productoFacturaRepository.save(productoFactura);
+        return ResponseEntity
+            .created(new URI("/api/producto-facturas/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    /**
+     * {@code PUT  /producto-facturas/:id} : Updates an existing productoFactura.
+     *
+     * @param id the id of the productoFactura to save.
+     * @param productoFactura the productoFactura to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated productoFactura,
+     * or with status {@code 400 (Bad Request)} if the productoFactura is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the productoFactura couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PutMapping("/producto-facturas/{id}")
+    public ResponseEntity<ProductoFactura> updateProductoFactura(
+        @PathVariable(value = "id", required = false) final Long id,
+        @RequestBody ProductoFactura productoFactura
+    ) throws URISyntaxException {
+        log.debug("REST request to update ProductoFactura : {}, {}", id, productoFactura);
+        if (productoFactura.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        if (!Objects.equals(id, productoFactura.getId())) {
+            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
+        }
+
+        if (!productoFacturaRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        ProductoFactura result = productoFacturaRepository.save(productoFactura);
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, productoFactura.getId().toString()))
+            .body(result);
+    }
+
+    /**
+     * {@code PATCH  /producto-facturas/:id} : Partial updates given fields of an existing productoFactura, field will ignore if it is null
+     *
+     * @param id the id of the productoFactura to save.
+     * @param productoFactura the productoFactura to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated productoFactura,
+     * or with status {@code 400 (Bad Request)} if the productoFactura is not valid,
+     * or with status {@code 404 (Not Found)} if the productoFactura is not found,
+     * or with status {@code 500 (Internal Server Error)} if the productoFactura couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PatchMapping(value = "/producto-facturas/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    public ResponseEntity<ProductoFactura> partialUpdateProductoFactura(
+        @PathVariable(value = "id", required = false) final Long id,
+        @RequestBody ProductoFactura productoFactura
+    ) throws URISyntaxException {
+        log.debug("REST request to partial update ProductoFactura partially : {}, {}", id, productoFactura);
+        if (productoFactura.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        if (!Objects.equals(id, productoFactura.getId())) {
+            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
+        }
+
+        if (!productoFacturaRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        Optional<ProductoFactura> result = productoFacturaRepository
+            .findById(productoFactura.getId())
+            .map(existingProductoFactura -> {
+                return existingProductoFactura;
+            })
+            .map(productoFacturaRepository::save);
+
+        return ResponseUtil.wrapOrNotFound(
+            result,
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, productoFactura.getId().toString())
+        );
+    }
+
+    /**
+     * {@code GET  /producto-facturas} : get all the productoFacturas.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of productoFacturas in body.
+     */
+    @GetMapping("/producto-facturas")
+    public List<ProductoFactura> getAllProductoFacturas() {
+        log.debug("REST request to get all ProductoFacturas");
+        return productoFacturaRepository.findAll();
+    }
+
+    /**
+     * {@code GET  /producto-facturas/:id} : get the "id" productoFactura.
+     *
+     * @param id the id of the productoFactura to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the productoFactura, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/producto-facturas/{id}")
+    public ResponseEntity<ProductoFactura> getProductoFactura(@PathVariable Long id) {
+        log.debug("REST request to get ProductoFactura : {}", id);
+        Optional<ProductoFactura> productoFactura = productoFacturaRepository.findById(id);
+        return ResponseUtil.wrapOrNotFound(productoFactura);
+    }
+
+    /**
+     * {@code DELETE  /producto-facturas/:id} : delete the "id" productoFactura.
+     *
+     * @param id the id of the productoFactura to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @DeleteMapping("/producto-facturas/{id}")
+    public ResponseEntity<Void> deleteProductoFactura(@PathVariable Long id) {
+        log.debug("REST request to delete ProductoFactura : {}", id);
+        productoFacturaRepository.deleteById(id);
+        return ResponseEntity
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
+    }
+}

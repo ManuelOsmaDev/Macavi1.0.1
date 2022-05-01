@@ -1,0 +1,29 @@
+{
+  "applications": ["macavi"],
+  "changelogDate": "20220501203939",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "rol",
+  "fields": [
+    {
+      "fieldName": "nombreRol",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength", "unique"],
+      "fieldValidateRulesMaxlength": "20"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Rol",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "rolUsuario",
+      "otherEntityRelationshipName": "rol",
+      "relationshipName": "rolUsuario",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

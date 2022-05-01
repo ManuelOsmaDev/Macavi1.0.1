@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity RolUsuario.
+    -->
+    <changeSet id="20220501204039-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="rol_id"
+                                 baseTableName="rol_usuario"
+                                 constraintName="fk_rol_usuario__rol_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rol"/>
+
+        <addForeignKeyConstraint baseColumnNames="usuario_rol_id"
+                                 baseTableName="rol_usuario"
+                                 constraintName="fk_rol_usuario__usuario_rol_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="usuario"/>
+    </changeSet>
+</databaseChangeLog>

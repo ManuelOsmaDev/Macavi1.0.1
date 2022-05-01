@@ -1,0 +1,28 @@
+{
+  "applications": ["macavi"],
+  "changelogDate": "20220501204239",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "producto_factura",
+  "fields": [],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ProductoFactura",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "factura",
+      "otherEntityRelationshipName": "prodctofactura",
+      "relationshipName": "factura",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "producto",
+      "otherEntityRelationshipName": "productoFactura",
+      "relationshipName": "producto",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}
