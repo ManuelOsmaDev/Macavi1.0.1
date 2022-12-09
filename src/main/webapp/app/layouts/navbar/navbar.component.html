@@ -26,9 +26,67 @@
             </span>
           </a>
         </li>
-        <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
+
         <li
           *ngSwitchCase="true"
+          ngbDropdownclass="nav-item"
+          routerLink="factura"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
+            <span>
+              <fa-icon icon="book"></fa-icon>
+              <span macaviTranslate="global.menu.entities.factura">Factura</span>
+            </span>
+          </a>
+        </li>
+
+        <li
+          *ngSwitchCase="true"
+          ngbDropdownclass="nav-item"
+          routerLink="producto"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
+            <span>
+              <fa-icon icon="th-list"></fa-icon>
+              <span macaviTranslate="global.menu.entities.producto">Producto</span>
+            </span>
+          </a>
+        </li>
+
+        <li
+          *ngSwitchCase="true"
+          ngbDropdownclass="nav-item"
+          routerLink="cliente"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
+            <span>
+              <fa-icon icon="user"></fa-icon>
+              <span macaviTranslate="global.menu.entities.cliente">Cliente</span>
+            </span>
+          </a>
+        </li>
+        <!--        <li>-->
+        <!--          <a-->
+        <!--            class="dropdown-item"-->
+        <!--            routerLink="factura"-->
+        <!--            routerLinkActive="active"-->
+        <!--            [routerLinkActiveOptions]="{ exact: true }"-->
+        <!--            (click)="collapseNavbar()"-->
+        <!--          >-->
+        <!--            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>-->
+        <!--            <span macaviTranslate="global.menu.entities.factura">Factura</span>-->
+        <!--          </a>-->
+        <!--        </li>-->
+
+        <!--         jhipster-needle-add-element-to-menu - JHipster will add new menu items here-->
+        <li
+          *macaviHasAnyAuthority="'ROLE_ADMIN'"
           ngbDropdown
           class="nav-item dropdown pointer"
           display="dynamic"
